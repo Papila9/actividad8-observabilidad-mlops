@@ -277,7 +277,7 @@ La validación integral más reciente obtuvo:
 - Tres Word válidos con tablas, secciones, encabezados, pies e imágenes.
 - Sin diagnósticos en los scripts de dashboards y documentos.
 
-La Actividad 5 no fue modificada. Este repositorio permanece sin commits ni pushes.
+La Actividad 5 no fue modificada. Este repositorio se publicó de forma independiente en GitHub después de la validación final.
 
 ## 17. Limitaciones
 
