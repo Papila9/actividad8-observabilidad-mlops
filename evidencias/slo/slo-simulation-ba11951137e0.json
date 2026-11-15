@@ -1,0 +1,235 @@
+{
+  "execution_id": "slo-simulation-ba11951137e0",
+  "execution_type": "controlled_slo_compliance_and_violation_simulation",
+  "simulation": {
+    "is_simulation": true,
+    "description": "Ventanas controladas para demostrar cumplimiento e incumplimiento de SLO; no representan tráfico de producción."
+  },
+  "config": {
+    "evaluation_window": "300s",
+    "budget_window": "30d_academic",
+    "availability_target": 0.99,
+    "latency_p95_target_ms": 500.0,
+    "latency_bad_window_fraction": 0.01,
+    "accuracy_target": 0.75,
+    "f1_macro_target": 0.7,
+    "quality_bad_window_fraction": 0.01,
+    "academic_note": "Objetivos iniciales para una demostración académica; no son compromisos de producción ni fueron calibrados con tráfico histórico."
+  },
+  "scenarios": {
+    "compliant": {
+      "evaluation_window": "300s",
+      "budget_window": "30d_academic",
+      "slis": {
+        "availability": 1.0,
+        "latency_mean_ms": 316.0,
+        "latency_p95_ms": 471.0,
+        "error_rate": 0.0,
+        "prediction_volume": 10,
+        "accuracy": null,
+        "f1_macro": null
+      },
+      "slos": {
+        "availability": {
+          "target": 0.99,
+          "actual": 1.0,
+          "comparator": ">=",
+          "passed": true,
+          "applicable": true,
+          "error_budget": {
+            "bad_events": 0.0,
+            "evaluated_events": 10,
+            "allowed_events": 0.10000000000000009,
+            "budget_consumed_fraction": 0.0,
+            "budget_remaining_fraction": 1.0
+          }
+        },
+        "latency_p95": {
+          "target": 500.0,
+          "actual": 471.0,
+          "comparator": "<=",
+          "passed": true,
+          "applicable": true,
+          "error_budget": {
+            "bad_events": 0,
+            "evaluated_events": 1,
+            "allowed_events": 0.01,
+            "budget_consumed_fraction": 0.0,
+            "budget_remaining_fraction": 1.0
+          }
+        },
+        "accuracy": {
+          "target": 0.75,
+          "actual": null,
+          "comparator": ">=",
+          "passed": null,
+          "applicable": false,
+          "error_budget": {
+            "bad_events": 0,
+            "evaluated_events": 1,
+            "allowed_events": 0.01,
+            "budget_consumed_fraction": 0.0,
+            "budget_remaining_fraction": 1.0
+          }
+        },
+        "f1_macro": {
+          "target": 0.7,
+          "actual": null,
+          "comparator": ">=",
+          "passed": null,
+          "applicable": false,
+          "error_budget": {
+            "bad_events": 0,
+            "evaluated_events": 1,
+            "allowed_events": 0.01,
+            "budget_consumed_fraction": 0.0,
+            "budget_remaining_fraction": 1.0
+          }
+        }
+      },
+      "overall_status": "compliant",
+      "quality_status": "unavailable_without_real_labels",
+      "methodology": {
+        "availability": "1 - error_rate; error budget counts failed predictions",
+        "latency": "p95 of each window; budget counts windows above target",
+        "quality": "accuracy and F1 macro only with real labels; budget counts failed labelled windows",
+        "volume": "informational SLI; no independent SLO"
+      }
+    },
+    "violation": {
+      "evaluation_window": "300s",
+      "budget_window": "30d_academic",
+      "slis": {
+        "availability": 0.98,
+        "latency_mean_ms": 606.0,
+        "latency_p95_ms": 606.0,
+        "error_rate": 0.02,
+        "prediction_volume": 100,
+        "accuracy": null,
+        "f1_macro": null
+      },
+      "slos": {
+        "availability": {
+          "target": 0.99,
+          "actual": 0.98,
+          "comparator": ">=",
+          "passed": false,
+          "applicable": true,
+          "error_budget": {
+            "bad_events": 2.0,
+            "evaluated_events": 100,
+            "allowed_events": 1.0000000000000009,
+            "budget_consumed_fraction": 1.9999999999999982,
+            "budget_remaining_fraction": 0.0
+          }
+        },
+        "latency_p95": {
+          "target": 500.0,
+          "actual": 606.0,
+          "comparator": "<=",
+          "passed": false,
+          "applicable": true,
+          "error_budget": {
+            "bad_events": 1,
+            "evaluated_events": 1,
+            "allowed_events": 0.01,
+            "budget_consumed_fraction": 100.0,
+            "budget_remaining_fraction": 0.0
+          }
+        },
+        "accuracy": {
+          "target": 0.75,
+          "actual": null,
+          "comparator": ">=",
+          "passed": null,
+          "applicable": false,
+          "error_budget": {
+            "bad_events": 0,
+            "evaluated_events": 1,
+            "allowed_events": 0.01,
+            "budget_consumed_fraction": 0.0,
+            "budget_remaining_fraction": 1.0
+          }
+        },
+        "f1_macro": {
+          "target": 0.7,
+          "actual": null,
+          "comparator": ">=",
+          "passed": null,
+          "applicable": false,
+          "error_budget": {
+            "bad_events": 0,
+            "evaluated_events": 1,
+            "allowed_events": 0.01,
+            "budget_consumed_fraction": 0.0,
+            "budget_remaining_fraction": 1.0
+          }
+        }
+      },
+      "overall_status": "violated",
+      "quality_status": "unavailable_without_real_labels",
+      "methodology": {
+        "availability": "1 - error_rate; error budget counts failed predictions",
+        "latency": "p95 of each window; budget counts windows above target",
+        "quality": "accuracy and F1 macro only with real labels; budget counts failed labelled windows",
+        "volume": "informational SLI; no independent SLO"
+      }
+    }
+  },
+  "alerts": [
+    {
+      "timestamp": "2026-11-15T22:03:19.762+00:00",
+      "event": "slo_alert",
+      "alert_id": "alert-65dd08f81eece306-slo-window-violation",
+      "fingerprint": "65dd08f81eece306",
+      "execution_id": "slo-simulation-ba11951137e0",
+      "window_id": "slo-window-violation",
+      "alert_type": "slo_breach",
+      "indicator": "availability",
+      "severity": "critical",
+      "reason": "slo_not_met",
+      "details": {
+        "target": 0.99,
+        "actual": 0.98,
+        "comparator": ">=",
+        "passed": false,
+        "applicable": true,
+        "error_budget": {
+          "bad_events": 2.0,
+          "evaluated_events": 100,
+          "allowed_events": 1.0000000000000009,
+          "budget_consumed_fraction": 1.9999999999999982,
+          "budget_remaining_fraction": 0.0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-11-15T22:03:19.763+00:00",
+      "event": "slo_alert",
+      "alert_id": "alert-fe87cb46023b52c6-slo-window-violation",
+      "fingerprint": "fe87cb46023b52c6",
+      "execution_id": "slo-simulation-ba11951137e0",
+      "window_id": "slo-window-violation",
+      "alert_type": "slo_breach",
+      "indicator": "latency_p95",
+      "severity": "critical",
+      "reason": "slo_not_met",
+      "details": {
+        "target": 500.0,
+        "actual": 606.0,
+        "comparator": "<=",
+        "passed": false,
+        "applicable": true,
+        "error_budget": {
+          "bad_events": 1,
+          "evaluated_events": 1,
+          "allowed_events": 0.01,
+          "budget_consumed_fraction": 100.0,
+          "budget_remaining_fraction": 0.0
+        }
+      }
+    }
+  ],
+  "log_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\logs\\slo_alerts.jsonl",
+  "mlflow_run_id": "3ae65a91c366499aa784a96c48ea9153"
+}

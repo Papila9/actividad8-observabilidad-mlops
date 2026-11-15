@@ -1,0 +1,10 @@
+# Dependencias heredadas y verificadas en la Actividad 5.
+pandas==3.0.6
+numpy==2.5.4
+scikit-learn==1.9.1
+matplotlib==3.11.2
+seaborn==0.13.2
+mlflow==3.17.1
+python-docx==1.2.0
+
+# No se agregaron dependencias nuevas en la Fase 2; se reutilizan las versiones de la Actividad 5.

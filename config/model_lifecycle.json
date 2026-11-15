@@ -1,0 +1,11 @@
+{
+  "stable_model_version": "logreg-stable-v1",
+  "candidate_model_version": "logreg-candidate-v2",
+  "acceptance": {
+    "min_accuracy": 0.75,
+    "min_f1_macro": 0.70,
+    "max_f1_drop_vs_stable": 0.0,
+    "auto_promotion": false
+  },
+  "simulation_note": "Los nombres de versión y la promoción/rollback se usan en un flujo académico controlado."
+}

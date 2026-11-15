@@ -1,0 +1,11 @@
+{
+  "evaluation_window": "300s",
+  "budget_window": "30d_academic",
+  "availability_target": 0.99,
+  "latency_p95_target_ms": 500.0,
+  "latency_bad_window_fraction": 0.01,
+  "accuracy_target": 0.75,
+  "f1_macro_target": 0.70,
+  "quality_bad_window_fraction": 0.01,
+  "academic_note": "Objetivos iniciales para una demostración académica; no son compromisos de producción ni fueron calibrados con tráfico histórico."
+}

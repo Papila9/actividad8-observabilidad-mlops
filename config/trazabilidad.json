@@ -1,0 +1,28 @@
+{
+  "project": "actividad8-observabilidad-mlops",
+  "source_project": "actividad8-mlops-clasificacion-sentimiento-main",
+  "phase": "fase_7",
+  "completed_phases": ["fase_1", "fase_2", "fase_3", "fase_4", "fase_5", "fase_6", "fase_7"],
+  "source_repository": "https://github.com/Papila9/actividad5-mlops-clasificacion-sentimiento",
+  "source_repository_modified": false,
+  "new_dependencies": [],
+  "historical_baseline": {
+    "data_sha256": "82539f706fdafc80f93dec7ae1cfc2310c179952f41548ed5c3ddf36effd67dd",
+    "rows": 14640,
+    "model": "logistic_regression",
+    "accuracy": 0.798155737704918,
+    "f1_macro": 0.7457002530158143,
+    "roc_auc_ovr_macro": 0.9110245729780063,
+    "protocol": "split estratificado 80/20, semilla 42, selección por F1 macro y TF-IDF dentro del pipeline"
+  },
+  "copied_artifacts": [
+    {"path": "src/actividad5/datos_prep.py", "role": "preparación de datos"},
+    {"path": "src/actividad5/train.py", "role": "entrenamiento y evaluación"},
+    {"path": "src/actividad5/auditoria_fase3.py", "role": "auditoría de duplicados"},
+    {"path": "src/actividad5/mlflow_tracking.py", "role": "seguimiento histórico con MLflow"},
+    {"path": "evidencias/baseline/metricas_experimentos.json", "role": "métricas históricas"},
+    {"path": "evidencias/baseline/comparacion_modelos.csv", "role": "comparación histórica"},
+    {"path": "evidencias/baseline/auditoria.json", "role": "auditoría histórica"}
+  ],
+  "data_policy": "No se duplica el CSV original en el proyecto nuevo; se conserva su hash y referencia por privacidad, licencia y tamaño."
+}

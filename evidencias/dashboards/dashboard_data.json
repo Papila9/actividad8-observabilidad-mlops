@@ -1,0 +1,17 @@
+{
+  "generated_from": {
+    "monitoring": "evidencias\\monitoring\\exec-c5fdb1da11f3.json",
+    "drift": "evidencias\\drift\\drift-simulation-5fd90e98ad50.json",
+    "slo": "evidencias\\slo\\slo-simulation-ba11951137e0.json",
+    "incidents": "evidencias\\incidentes\\incidents-simulation-2b4ac90f232f.json",
+    "model_lifecycle": "evidencias\\modelos\\retraining-simulation-295e2bf4242c.json"
+  },
+  "simulation_boundary": "Los incidentes, escenarios SLO y ciclo de modelo están identificados como simulaciones controladas.",
+  "charts": [
+    "dashboard_operacion.png",
+    "dashboard_slo.png",
+    "dashboard_drift_alertas.png",
+    "dashboard_incidentes.png",
+    "dashboard_modelos.png"
+  ]
+}

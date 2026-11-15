@@ -1,0 +1,94 @@
+{
+  "execution_id": "retraining-simulation-295e2bf4242c",
+  "execution_type": "controlled_retraining_and_rollback_simulation",
+  "simulation": {
+    "is_simulation": true,
+    "description": "El candidato se entrenó con datos existentes; la promoción/rollback se simula en un registro separado."
+  },
+  "data_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\datos\\datos_limp\\Tweets_limpios.csv",
+  "stable": {
+    "version": "logreg-stable-v1",
+    "evaluation": {
+      "metrics": {
+        "accuracy": 0.798155737704918,
+        "f1_macro": 0.7457002530158143
+      },
+      "data_sha256": "82539f706fdafc80f93dec7ae1cfc2310c179952f41548ed5c3ddf36effd67dd",
+      "rows": 14640,
+      "train_rows": 11712,
+      "test_rows": 2928,
+      "columns": [
+        "text",
+        "airline_sentiment"
+      ],
+      "random_seed": 42,
+      "test_size": 0.2,
+      "params": {
+        "C": 3.0,
+        "ngram_range": [
+          1,
+          2
+        ]
+      }
+    },
+    "artifact_sha256": "e47440082877353a1eb7ae68895abac8136f48ab47742fc2099de675c1ee79bf"
+  },
+  "candidate": {
+    "version": "logreg-candidate-v2",
+    "evaluation": {
+      "metrics": {
+        "accuracy": 0.7739071038251366,
+        "f1_macro": 0.7258019946741494
+      },
+      "data_sha256": "82539f706fdafc80f93dec7ae1cfc2310c179952f41548ed5c3ddf36effd67dd",
+      "rows": 14640,
+      "train_rows": 11712,
+      "test_rows": 2928,
+      "columns": [
+        "text",
+        "airline_sentiment"
+      ],
+      "random_seed": 42,
+      "test_size": 0.2,
+      "params": {
+        "C": 1.0,
+        "ngram_range": [
+          1,
+          1
+        ]
+      }
+    },
+    "artifact_sha256": "f738758ac0faf7b3c42e772d4247abc87056e6a16272e64c0db3b56ab44ddf63"
+  },
+  "acceptance_decision": {
+    "accepted": false,
+    "checks": {
+      "accuracy_meets_minimum": true,
+      "f1_macro_meets_minimum": true,
+      "f1_drop_within_tolerance": false
+    },
+    "thresholds": {
+      "min_accuracy": 0.75,
+      "min_f1_macro": 0.7,
+      "max_f1_drop": 0.0
+    },
+    "deltas_vs_stable": {
+      "accuracy": -0.02424863387978138,
+      "f1_macro": -0.01989825834166492
+    }
+  },
+  "registry_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\evidencias\\modelos\\model_registry.json",
+  "rollback_simulation": {
+    "event": {
+      "event": "rollback",
+      "from_version": "logreg-candidate-v2",
+      "to_version": "logreg-stable-v1",
+      "reason": "Simulación de recuperación a la versión estable",
+      "simulation": true,
+      "timestamp": "2026-11-15T22:12:40.884508+00:00"
+    },
+    "registry_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\evidencias\\modelos\\rollback_simulation_registry.json",
+    "active_version_after": "logreg-stable-v1"
+  },
+  "mlflow_run_id": "dd3260df7874492aa6ab5e183e9c45e7"
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "active_version": "logreg-stable-v1",
+  "stable_version": "logreg-stable-v1",
+  "versions": {
+    "logreg-stable-v1": {
+      "version": "logreg-stable-v1",
+      "model_name": "logistic_regression",
+      "artifact_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\evidencias\\modelos\\logreg-stable-v1.pkl",
+      "artifact_sha256": "e47440082877353a1eb7ae68895abac8136f48ab47742fc2099de675c1ee79bf",
+      "metrics": {
+        "accuracy": 0.798155737704918,
+        "f1_macro": 0.7457002530158143
+      },
+      "data_sha256": "82539f706fdafc80f93dec7ae1cfc2310c179952f41548ed5c3ddf36effd67dd",
+      "protocol": {
+        "metrics": {
+          "accuracy": 0.798155737704918,
+          "f1_macro": 0.7457002530158143
+        },
+        "data_sha256": "82539f706fdafc80f93dec7ae1cfc2310c179952f41548ed5c3ddf36effd67dd",
+        "rows": 14640,
+        "train_rows": 11712,
+        "test_rows": 2928,
+        "columns": [
+          "text",
+          "airline_sentiment"
+        ],
+        "random_seed": 42,
+        "test_size": 0.2,
+        "params": {
+          "C": 3.0,
+          "ngram_range": [
+            1,
+            2
+          ]
+        }
+      },
+      "status": "stable"
+    },
+    "logreg-candidate-v2": {
+      "version": "logreg-candidate-v2",
+      "model_name": "logistic_regression",
+      "artifact_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\evidencias\\modelos\\logreg-candidate-v2.pkl",
+      "artifact_sha256": "f738758ac0faf7b3c42e772d4247abc87056e6a16272e64c0db3b56ab44ddf63",
+      "metrics": {
+        "accuracy": 0.7739071038251366,
+        "f1_macro": 0.7258019946741494
+      },
+      "data_sha256": "82539f706fdafc80f93dec7ae1cfc2310c179952f41548ed5c3ddf36effd67dd",
+      "protocol": {
+        "metrics": {
+          "accuracy": 0.7739071038251366,
+          "f1_macro": 0.7258019946741494
+        },
+        "data_sha256": "82539f706fdafc80f93dec7ae1cfc2310c179952f41548ed5c3ddf36effd67dd",
+        "rows": 14640,
+        "train_rows": 11712,
+        "test_rows": 2928,
+        "columns": [
+          "text",
+          "airline_sentiment"
+        ],
+        "random_seed": 42,
+        "test_size": 0.2,
+        "params": {
+          "C": 1.0,
+          "ngram_range": [
+            1,
+            1
+          ]
+        }
+      },
+      "status": "rejected_candidate"
+    }
+  },
+  "events": []
+}
