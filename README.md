@@ -1,6 +1,6 @@
 # Actividad 8 — Observabilidad y MLOps para clasificación de sentimientos
 
-Proyecto académico independiente derivado de la Actividad 5. Implementa observabilidad, detección de drift, SLI/SLO, error budgets, gestión de incidentes, runbooks, versionamiento, reentrenamiento y rollback para un clasificador de sentimientos de comentarios sobre aerolíneas.
+Proyecto derivado de la Actividad 5. Implementa observabilidad, detección de drift, SLI/SLO, error budgets, gestión de incidentes, runbooks, versionamiento, reentrenamiento y rollback para un clasificador de sentimientos de comentarios sobre aerolíneas.
 
 El proyecto no representa un servicio desplegado en producción. Las ejecuciones denominadas `smoke_test`, `controlled_*` y `simulation` son validaciones controladas y se conservan como evidencia, no como incidentes reales.
 
