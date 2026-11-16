@@ -326,7 +326,7 @@ Las correcciones posteriores a la revisión incorporan:
 
 Evidencia nueva de ejecución: [evidencias/slo/](evidencias/slo/), [evidencias/drift/model-drift-simulation.json](evidencias/drift/model-drift-simulation.json), [logs/slo_real_latency.jsonl](logs/slo_real_latency.jsonl) y [logs/alert_responses.jsonl](logs/alert_responses.jsonl). Los resultados no representan producción y no reemplazan el baseline original.
 
-## Correcciones de la segunda tanda
+## Correcciones
 
 - La calibración de drift usa 20 ventanas aleatorias de 300 filas, semilla 42, y se conserva separada del baseline histórico en [evidencias/drift/calibracion_20_ventanas.json](evidencias/drift/calibracion_20_ventanas.json). Las referencias empíricas observadas fueron JSD p95 `0.02226484478454515`, JSD p99 `0.022683603678210738`, KS p95 `0.08456762295081968` y KS p99 `0.08900095628415298`.
 - Las alertas persisten estado en archivos `.state.json` junto al log, respetan el cooldown de [config/drift_alerts.json](config/drift_alerts.json) y exponen detecciones generadas, alertas emitidas y alertas suprimidas.
