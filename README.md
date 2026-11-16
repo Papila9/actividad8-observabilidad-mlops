@@ -4,6 +4,12 @@ Proyecto derivado de la Actividad 5. Implementa observabilidad, detección de dr
 
 El proyecto no representa un servicio desplegado en producción. Las ejecuciones denominadas `smoke_test`, `controlled_*` y `simulation` son validaciones controladas y se conservan como evidencia, no como incidentes reales.
 
+## Demostración en Google Colab
+
+[![Abrir en Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Papila9/actividad8-observabilidad-mlops/blob/main/notebooks/actividad8_demo_colab.ipynb)
+
+El notebook [actividad8_demo_colab.ipynb](notebooks/actividad8_demo_colab.ipynb) descarga el repositorio, instala las dependencias, ejecuta las pruebas reproducibles y consulta las evidencias de métricas, SLO, drift, incidentes y ciclo de vida del modelo. El CSV original no se publica; las métricas históricas supervisadas se cargan desde sus evidencias versionadas.
+
 ## 1. Objetivo y alcance
 
 El objetivo es demostrar, mediante ejecuciones reproducibles, cómo observar un modelo de clasificación, detectar cambios o incumplimientos, registrar incidentes, comparar modelos y recuperar una versión estable.
