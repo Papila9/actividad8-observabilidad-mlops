@@ -4,7 +4,7 @@ from pathlib import Path
 
 from src.alertas import AlertManager
 from src.metricas import calculate_window_metrics
-from src.slo import evaluate_slos
+from src.slo import calculate_burn_rate, evaluate_slos
 
 
 class SLOTests(unittest.TestCase):
@@ -50,6 +50,14 @@ class SLOTests(unittest.TestCase):
         self.assertEqual(len(duplicate), 0)
         self.assertEqual(len(cooldown), 0)
         self.assertGreaterEqual(len(after), 1)
+
+    def test_multiple_windows_and_burn_rate(self):
+        metrics = calculate_window_metrics([606] * 4, error_count=0)
+        result = evaluate_slos(metrics, evaluation_windows=4, latency_breach_windows=2)
+        self.assertEqual(result["slos"]["latency_p95"]["error_budget"]["bad_events"], 2)
+        self.assertEqual(result["burn_rate"]["latency_p95"]["short_window"], "5m")
+        self.assertGreater(result["burn_rate"]["latency_p95"]["burn_rate"], 1)
+        self.assertIsNone(calculate_burn_rate(bad_windows=0, evaluated_windows=0, allowed_fraction=0.01)["burn_rate"])
 
 
 if __name__ == "__main__":

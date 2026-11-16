@@ -25,6 +25,17 @@ class AlertTests(unittest.TestCase):
             self.assertEqual(len(cooldown), 0)
             self.assertEqual(len(after_cooldown), 1)
 
+    def test_state_persists_after_process_restart(self):
+        with tempfile.TemporaryDirectory() as directory:
+            log_path = Path(directory) / "alerts.jsonl"
+            now = [100.0]
+            detection = {"data_drift": {"severity": "high", "signal": 0.3}, "class_distribution_shift": {"status": "unavailable_without_labels"}, "model_drift": {"status": "unavailable_without_real_labels"}}
+            first = AlertManager(log_path, cooldown_seconds=60, clock=lambda: now[0])
+            self.assertEqual(len(first.evaluate(detection, execution_id="exec-1", window_id="window-1")), 1)
+            restarted = AlertManager(log_path, cooldown_seconds=60, clock=lambda: now[0])
+            self.assertEqual(len(restarted.evaluate(detection, execution_id="exec-2", window_id="window-2")), 0)
+            self.assertEqual(restarted.stats()["alerts_suppressed"], 1)
+
     def test_model_critical_alert_requires_supervised_signal(self):
         with tempfile.TemporaryDirectory() as directory:
             manager = AlertManager(Path(directory) / "alerts.jsonl")

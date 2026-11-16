@@ -35,8 +35,8 @@ from sklearn.model_selection import GridSearchCV, StratifiedKFold, train_test_sp
 from sklearn.pipeline import Pipeline
 
 try:
-    from fuentes.datos_prep import EXPECTED_LABELS, load_dataset, sha256_file
-except ImportError:  # Permite ejecutar el archivo directamente desde fuentes/.
+    from .datos_prep import EXPECTED_LABELS, load_dataset, sha256_file
+except ImportError:  # Permite ejecutar el archivo directamente.
     from datos_prep import EXPECTED_LABELS, load_dataset, sha256_file
 
 SEED = 42
@@ -282,7 +282,7 @@ def run_experiments(data_path: Path, output_dir: Path, evidence_dir: Path) -> di
 
 
 def main() -> None:
-    root = Path(__file__).resolve().parents[1]
+    root = Path(__file__).resolve().parents[2]
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, default=root / "datos" / "datos_limp" / "Tweets_limpios.csv")
     parser.add_argument("--output-dir", type=Path, default=root / "reportes" / "entrenamiento")

@@ -231,7 +231,7 @@ def prepare_dataset(source: Path, output_dir: Path, original_dir: Path | None = 
 
 
 def main() -> None:
-    root = Path(__file__).resolve().parents[1]
+    root = Path(__file__).resolve().parents[2]
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, default=root / "datos" / "datos_ini" / "Tweets.csv")
     parser.add_argument("--output-dir", type=Path, default=root / "datos" / "datos_limp")

@@ -67,17 +67,22 @@ def classify_alert(alert: dict[str, Any]) -> str:
 def build_incident(alert: dict[str, Any], *, simulation: bool = True) -> dict[str, Any]:
     incident_type = classify_alert(alert)
     runbook = RUNBOOKS[incident_type]
+    created_at = datetime.now(timezone.utc).isoformat(timespec="milliseconds")
     return {
         "incident_id": f"inc-{uuid.uuid4().hex[:12]}",
-        "created_at": datetime.now(timezone.utc).isoformat(timespec="milliseconds"),
+        "created_at": created_at,
         "incident_type": incident_type,
         "severity": alert.get("severity", runbook["severity_default"]),
-        "status": "closed" if simulation else "open",
+        "status": "open",
         "simulation": {"is_simulation": simulation},
         "source_alert": alert,
         "runbook": runbook,
+        "lifecycle": [
+            {"step": "detection", "timestamp": created_at, "status": "completed", "result": "source_alert_recorded"},
+            {"step": "classification", "timestamp": created_at, "status": "completed", "result": incident_type},
+        ],
         "data_drift_boundary": "Data drift no implica model drift ni pérdida de precisión sin etiquetas reales.",
-        "closure_note": "Cerrado como escenario académico controlado; no representa producción real." if simulation else None,
+        "closure_note": "Pendiente de verificación y cierre del runbook; escenario académico controlado, no representa producción real." if simulation else None,
     }
 
 

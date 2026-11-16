@@ -7,7 +7,7 @@ from pathlib import Path
 import mlflow
 from mlflow.tracking import MlflowClient
 
-from fuentes.mlflow_tracking import _log_run
+from src.actividad5.mlflow_tracking import _log_run
 
 
 class MlflowTrackingTests(unittest.TestCase):

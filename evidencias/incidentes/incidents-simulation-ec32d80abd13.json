@@ -1,0 +1,135 @@
+{
+  "execution_id": "incidents-simulation-ec32d80abd13",
+  "execution_type": "controlled_incident_and_runbook_simulation",
+  "simulation": {
+    "is_simulation": true,
+    "description": "Incidentes derivados de evidencias controladas; no representan producción."
+  },
+  "source_evidence": [
+    "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\evidencias\\drift\\drift-simulation-8e21a2f799cf.json",
+    "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\evidencias\\slo\\slo-simulation-ba11951137e0.json"
+  ],
+  "incidents": [
+    {
+      "incident_id": "inc-503176ae6a5d",
+      "created_at": "2026-11-16T01:00:56.977+00:00",
+      "incident_type": "data_drift",
+      "severity": "high",
+      "status": "open",
+      "simulation": {
+        "is_simulation": true
+      },
+      "source_alert": {
+        "timestamp": "2026-11-16T00:54:13.222+00:00",
+        "event": "drift_alert",
+        "alert_id": "alert-66da6f401defc7cc-window-300",
+        "fingerprint": "66da6f401defc7cc",
+        "execution_id": "drift-simulation-8e21a2f799cf",
+        "window_id": "window-300",
+        "alert_type": "data_drift",
+        "severity": "high",
+        "reason": "text_distribution_changed",
+        "details": {
+          "token_jsd": 0.008807901347323788,
+          "length_ks": 0.3833333333333334,
+          "signal": 0.3833333333333334,
+          "severity": "high",
+          "thresholds": {
+            "medium": 0.08456762295081968,
+            "high": 0.08900095628415298
+          }
+        }
+      },
+      "runbook": {
+        "severity_default": "high",
+        "detection": "Comparar la ventana contra el baseline mediante KS/JSD.",
+        "diagnosis": "Confirmar window_id, volumen, fuente, tokenización y duplicados.",
+        "impact": "No inferir pérdida de precisión sin etiquetas reales; revisar exposición y clases.",
+        "response": "Mantener observación, solicitar etiquetas y preparar evaluación supervisada.",
+        "recovery": "Dos ventanas consecutivas sin alerta o evaluación supervisada aceptable.",
+        "closure": "Registrar causa, evidencia, acciones y responsable académico."
+      },
+      "lifecycle": [
+        {
+          "step": "detection",
+          "timestamp": "2026-11-16T01:00:56.977+00:00",
+          "status": "completed",
+          "result": "source_alert_recorded"
+        },
+        {
+          "step": "classification",
+          "timestamp": "2026-11-16T01:00:56.977+00:00",
+          "status": "completed",
+          "result": "data_drift"
+        }
+      ],
+      "data_drift_boundary": "Data drift no implica model drift ni pérdida de precisión sin etiquetas reales.",
+      "closure_note": "Pendiente de verificación y cierre del runbook; escenario académico controlado, no representa producción real.",
+      "execution_id": "incidents-simulation-ec32d80abd13"
+    },
+    {
+      "incident_id": "inc-8af29a269c2c",
+      "created_at": "2026-11-16T01:00:56.977+00:00",
+      "incident_type": "slo_latency",
+      "severity": "critical",
+      "status": "open",
+      "simulation": {
+        "is_simulation": true
+      },
+      "source_alert": {
+        "timestamp": "2026-11-15T22:03:19.763+00:00",
+        "event": "slo_alert",
+        "alert_id": "alert-fe87cb46023b52c6-slo-window-violation",
+        "fingerprint": "fe87cb46023b52c6",
+        "execution_id": "slo-simulation-ba11951137e0",
+        "window_id": "slo-window-violation",
+        "alert_type": "slo_breach",
+        "indicator": "latency_p95",
+        "severity": "critical",
+        "reason": "slo_not_met",
+        "details": {
+          "target": 500.0,
+          "actual": 606.0,
+          "comparator": "<=",
+          "passed": false,
+          "applicable": true,
+          "error_budget": {
+            "bad_events": 1,
+            "evaluated_events": 1,
+            "allowed_events": 0.01,
+            "budget_consumed_fraction": 100.0,
+            "budget_remaining_fraction": 0.0
+          }
+        }
+      },
+      "runbook": {
+        "severity_default": "critical",
+        "detection": "Comparar p95 de la ventana con el SLO de 500 ms y su error budget.",
+        "diagnosis": "Separar inferencia local de red, cola, I/O y MLflow; revisar errores y volumen.",
+        "impact": "Incumplimiento técnico de latencia; no implica model drift.",
+        "response": "Reducir carga experimental, revisar pipeline y evaluar rollback si existe versión estable.",
+        "recovery": "Ventana posterior dentro de 500 ms y recuperación del presupuesto en el escenario controlado.",
+        "closure": "Conservar p95, alertas, acción correctiva y resultado posterior."
+      },
+      "lifecycle": [
+        {
+          "step": "detection",
+          "timestamp": "2026-11-16T01:00:56.977+00:00",
+          "status": "completed",
+          "result": "source_alert_recorded"
+        },
+        {
+          "step": "classification",
+          "timestamp": "2026-11-16T01:00:56.977+00:00",
+          "status": "completed",
+          "result": "slo_latency"
+        }
+      ],
+      "data_drift_boundary": "Data drift no implica model drift ni pérdida de precisión sin etiquetas reales.",
+      "closure_note": "Pendiente de verificación y cierre del runbook; escenario académico controlado, no representa producción real.",
+      "execution_id": "incidents-simulation-ec32d80abd13"
+    }
+  ],
+  "log_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\logs\\incidents_second_tanda.jsonl",
+  "mlflow_run_id": "0e69edec0ed24a669108561f269f2a52"
+}

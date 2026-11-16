@@ -1,6 +1,6 @@
 import unittest
 
-from src.deteccion_drift import build_baseline, detect_drift, jensen_shannon_divergence, ks_statistic
+from src.deteccion_drift import _distribution, build_baseline, detect_drift, jensen_shannon_divergence, ks_statistic
 
 
 class DriftDetectionTests(unittest.TestCase):
@@ -44,6 +44,11 @@ class DriftDetectionTests(unittest.TestCase):
     def test_statistical_helpers(self):
         self.assertEqual(ks_statistic([1, 2, 3], [1, 2, 3]), 0.0)
         self.assertGreater(jensen_shannon_divergence([1.0, 0.0], [0.0, 1.0]), 0.9)
+
+    def test_current_distribution_uses_baseline_vocabulary(self):
+        counts, _ = _distribution(["newtoken newtoken"], 2, ["known", "__other__"])
+        self.assertEqual(set(counts), {"known", "__other__"})
+        self.assertEqual(counts["__other__"], 2)
 
 
 if __name__ == "__main__":

@@ -14,7 +14,8 @@ class IncidentTests(unittest.TestCase):
         incident = build_incident({"alert_type": "data_drift", "severity": "high"})
         self.assertTrue(incident["simulation"]["is_simulation"])
         self.assertIn("etiquetas reales", incident["data_drift_boundary"])
-        self.assertEqual(incident["status"], "closed")
+        self.assertEqual(incident["status"], "open")
+        self.assertEqual([step["step"] for step in incident["lifecycle"]], ["detection", "classification"])
 
 
 if __name__ == "__main__":

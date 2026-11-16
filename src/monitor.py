@@ -114,21 +114,33 @@ class MonitoringSession:
         true_label: str | None = None,
         error: str | None = None,
         metadata: dict[str, Any] | None = None,
+        trace_id: str | None = None,
+        span_id: str | None = None,
+        vectorization_ms: float | None = None,
+        prediction_ms: float | None = None,
     ) -> None:
         """Registra una predicción; true_label es opcional y nunca se infiere."""
         if latency_ms < 0:
             raise ValueError("latency_ms no puede ser negativo")
+        trace_id = trace_id or f"trace-{uuid.uuid4().hex[:16]}"
+        span_id = span_id or f"span-{uuid.uuid4().hex[:16]}"
+        stage_durations = {"vectorization_ms": vectorization_ms, "prediction_ms": prediction_ms}
+        if any(value is not None and value < 0 for value in stage_durations.values()):
+            raise ValueError("Las duraciones de etapas no pueden ser negativas")
         observation = {
             "predicted_label": predicted_label,
             "true_label": true_label,
             "latency_ms": float(latency_ms),
             "error": error,
             "metadata": metadata or {},
+            "trace_id": trace_id,
+            "span_id": span_id,
+            "stage_durations_ms": stage_durations,
         }
         self._observations.append(observation)
         self._emit(
             "prediction_error" if error else "prediction_recorded",
-            {"latency_ms": float(latency_ms), "error": error, "metadata": metadata or {}},
+            {"latency_ms": float(latency_ms), "error": error, "metadata": metadata or {}, "trace_id": trace_id, "span_id": span_id, "stage_durations_ms": stage_durations},
         )
 
     def finalize(self) -> dict[str, Any]:

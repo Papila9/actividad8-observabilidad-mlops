@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from fuentes.datos_prep import clean_rows, load_dataset, prepare_dataset, quality_report
+from src.actividad5.datos_prep import clean_rows, load_dataset, prepare_dataset, quality_report
 
 
 class DataPreparationTests(unittest.TestCase):

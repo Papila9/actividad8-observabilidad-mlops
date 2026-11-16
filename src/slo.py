@@ -18,7 +18,18 @@ DEFAULT_SLO_CONFIG: dict[str, Any] = {
     "accuracy_target": 0.75,
     "f1_macro_target": 0.70,
     "quality_bad_window_fraction": 0.01,
+    "burn_rate": {"short_window": "5m", "long_window": "1h", "warning": 2.0, "critical": 4.0},
 }
+
+
+def calculate_burn_rate(*, bad_windows: int, evaluated_windows: int, allowed_fraction: float) -> dict[str, float | None]:
+    """Calcula burn rate de una ventana; no inventa consumo si no hay observaciones."""
+    if bad_windows < 0 or evaluated_windows < 0 or bad_windows > evaluated_windows:
+        raise ValueError("Las ventanas incumplidas deben estar entre cero y el total")
+    if evaluated_windows == 0 or allowed_fraction <= 0:
+        return {"observed_bad_fraction": None, "burn_rate": None}
+    observed = bad_windows / evaluated_windows
+    return {"observed_bad_fraction": observed, "burn_rate": observed / allowed_fraction}
 
 
 def _budget(
@@ -175,12 +186,27 @@ def evaluate_slos(
             applicable=quality_available,
         ),
     }
+    latency_budget = slos["latency_p95"]["error_budget"]
+    burn = calculate_burn_rate(
+        bad_windows=latency_breaches,
+        evaluated_windows=evaluation_windows,
+        allowed_fraction=float(cfg["latency_bad_window_fraction"]),
+    )
+    burn_config = cfg.get("burn_rate", DEFAULT_SLO_CONFIG["burn_rate"])
+    burn["short_window"] = burn_config["short_window"]
+    burn["long_window"] = burn_config["long_window"]
+    burn["severity"] = (
+        "critical" if burn["burn_rate"] is not None and burn["burn_rate"] >= float(burn_config["critical"])
+        else "high" if burn["burn_rate"] is not None and burn["burn_rate"] >= float(burn_config["warning"])
+        else "none"
+    )
     applicable_statuses = [item["passed"] for item in slos.values() if item["applicable"]]
     return {
         "evaluation_window": cfg["evaluation_window"],
         "budget_window": cfg["budget_window"],
         "slis": slis,
         "slos": slos,
+        "burn_rate": {"latency_p95": burn, "source_budget": latency_budget},
         "overall_status": "violated" if any(status is False for status in applicable_statuses) else "compliant",
         "quality_status": "available" if quality_available else "unavailable_without_real_labels",
         "methodology": {

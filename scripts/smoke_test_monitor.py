@@ -44,6 +44,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data", type=Path, required=True)
     parser.add_argument("--sample-size", type=int, default=300)
+    parser.add_argument("--model-version", default="smoke_test-c3-tfidf-unigrams")
+    parser.add_argument("--execution-type", default="smoke_test")
     args = parser.parse_args()
     texts, labels = load_rows(args.data)
     train_texts, test_texts, train_labels, test_labels = train_test_split(
@@ -56,7 +58,7 @@ def main() -> None:
 
     model = Pipeline(
         [
-            ("tfidf", TfidfVectorizer(lowercase=True, strip_accents="unicode", sublinear_tf=True, min_df=2)),
+            ("tfidf", TfidfVectorizer(lowercase=True, strip_accents="unicode", sublinear_tf=True, max_features=30000, min_df=2)),
             ("classifier", LogisticRegression(class_weight="balanced", C=3.0, max_iter=1000, random_state=42)),
         ]
     )
@@ -66,24 +68,39 @@ def main() -> None:
     tracking_uri = (ROOT / "mlruns").as_uri()
     session = MonitoringSession(
         model_name="logistic_regression",
-        model_version="smoke_test-c3-tfidf-unigrams-bigrams",
+        model_version=args.model_version,
         output_dir=ROOT / "evidencias" / "monitoring",
         baseline_path=ROOT / "evidencias" / "baseline" / "metricas_experimentos.json",
         tracking_uri=tracking_uri,
         experiment_name="Actividad8_Observabilidad",
     )
+    instrumentation_prediction_mismatches = 0
     for index, (text, true_label) in enumerate(zip(test_texts, test_labels)):
+        trace_id = f"trace-{index:06d}"
+        span_id = f"span-{index:06d}"
         start = time.perf_counter()
-        predicted = str(model.predict([text])[0])
+        reference_prediction = str(model.predict([text])[0])
+        vector_start = time.perf_counter()
+        features = model.named_steps["tfidf"].transform([text])
+        vectorization_ms = (time.perf_counter() - vector_start) * 1000
+        prediction_start = time.perf_counter()
+        predicted = str(model.named_steps["classifier"].predict(features)[0])
+        instrumentation_prediction_mismatches += int(predicted != reference_prediction)
+        prediction_ms = (time.perf_counter() - prediction_start) * 1000
         latency_ms = (time.perf_counter() - start) * 1000
         session.record_prediction(
             predicted_label=predicted,
             true_label=true_label,
             latency_ms=latency_ms,
-            metadata={"sample_index": index, "execution_type": "smoke_test"},
+            metadata={"sample_index": index, "execution_type": args.execution_type},
+            trace_id=trace_id,
+            span_id=span_id,
+            vectorization_ms=vectorization_ms,
+            prediction_ms=prediction_ms,
         )
     result = session.finalize()
-    result["execution_type"] = "smoke_test"
+    result["instrumentation_validation"] = {"prediction_mismatches": instrumentation_prediction_mismatches, "status": "same_predictions" if instrumentation_prediction_mismatches == 0 else "mismatch_detected"}
+    result["execution_type"] = args.execution_type
     result["data"] = {
         "path": str(args.data),
         "sha256": sha256_file(args.data),

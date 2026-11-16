@@ -28,6 +28,7 @@ def train_and_evaluate(data_path: Path, *, params: dict[str, Any], random_seed: 
                 lowercase=True,
                 strip_accents="unicode",
                 sublinear_tf=True,
+                max_features=int(params.get("max_features", 30000)),
                 min_df=2,
                 ngram_range=tuple(params.get("ngram_range", (1, 2))),
             )),

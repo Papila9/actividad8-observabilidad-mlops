@@ -20,11 +20,11 @@ from sklearn.metrics import classification_report, confusion_matrix
 from sklearn.model_selection import StratifiedGroupKFold, train_test_split
 
 try:
-    from fuentes.train import (
+    from .train import (
         CV_SPLITS, EXPECTED_LABELS, SEED, TEST_SIZE, _plot_results, _write_json,
         build_search, evaluate_predictions, run_experiments,
     )
-    from fuentes.datos_prep import load_dataset, sha256_file
+    from .datos_prep import load_dataset, sha256_file
 except ImportError:  # Permite también `python fuentes/auditoria_fase3.py`.
     from train import (
         CV_SPLITS, EXPECTED_LABELS, SEED, TEST_SIZE, _plot_results, _write_json,
@@ -32,7 +32,7 @@ except ImportError:  # Permite también `python fuentes/auditoria_fase3.py`.
     )
     from datos_prep import load_dataset, sha256_file
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 DATA_PATH = ROOT / "datos" / "datos_limp" / "Tweets_limpios.csv"
 ORIGINAL_DIR = ROOT / "reportes" / "entrenamiento"
 AUDIT_DIR = ROOT / "reportes" / "auditoria_fase3"

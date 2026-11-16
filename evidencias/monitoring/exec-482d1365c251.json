@@ -1,0 +1,46 @@
+{
+  "execution_id": "exec-482d1365c251",
+  "model_name": "logistic_regression",
+  "model_version": "logreg-stable-v1",
+  "metrics": {
+    "latency_mean_ms": 1.61073402967304,
+    "latency_p95_ms": 2.6838200399652123,
+    "error_rate": 0.0,
+    "prediction_volume": 50,
+    "accuracy": 0.84,
+    "f1_macro": 0.777056277056277
+  },
+  "metric_availability": {
+    "inference": true,
+    "supervised": true,
+    "supervised_observations": 50
+  },
+  "log_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\logs\\exec-482d1365c251.jsonl",
+  "trace_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\traces\\exec-482d1365c251.jsonl",
+  "baseline_comparison": {
+    "accuracy": {
+      "baseline": 0.798155737704918,
+      "observed": 0.84,
+      "delta": 0.04184426229508198
+    },
+    "f1_macro": {
+      "baseline": 0.7457002530158143,
+      "observed": 0.777056277056277,
+      "delta": 0.03135602404046267
+    }
+  },
+  "mlflow_run_id": "a659af5f94c7442b9121b7fc4eeb2dee",
+  "instrumentation_validation": {
+    "prediction_mismatches": 0,
+    "status": "same_predictions"
+  },
+  "execution_type": "rollback_recovery_measurement",
+  "data": {
+    "path": "..\\datos\\datos_ini\\Tweets.csv",
+    "sha256": "ea94b23f41892b290dec3330bb8cf9cb6b8bc669eaae5f3a84c40f7b0de8f15e",
+    "total_rows": 14640,
+    "sample_size": 50,
+    "train_rows": 11712,
+    "random_seed": 42
+  }
+}

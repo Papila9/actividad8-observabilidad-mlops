@@ -31,9 +31,13 @@ def tokenize(text: str) -> list[str]:
     return [token.lower() for token in TOKEN_RE.findall(text)]
 
 
-def _distribution(texts: list[str], top_tokens: int) -> tuple[dict[str, int], int]:
+def _distribution(texts: list[str], top_tokens: int, vocabulary: list[str] | None = None) -> tuple[dict[str, int], int]:
     counts = Counter(token for text in texts for token in tokenize(text))
-    selected = dict(counts.most_common(top_tokens))
+    if vocabulary is None:
+        selected = dict(counts.most_common(top_tokens))
+        vocabulary = list(selected)
+    else:
+        selected = {token: counts.get(token, 0) for token in vocabulary if token != "__other__"}
     selected["__other__"] = sum(value for key, value in counts.items() if key not in selected)
     return selected, sum(counts.values())
 
@@ -151,8 +155,9 @@ def detect_drift(
     }
     baseline_lengths = baseline["text"]["lengths_chars"]
     current_lengths = [len(text) for text in current_texts]
-    current_counts, current_total = _distribution(current_texts, baseline["method"]["top_tokens"])
-    keys = sorted(set(baseline["text"]["token_counts"]) | set(current_counts))
+    baseline_vocabulary = list(baseline["text"]["token_counts"])
+    current_counts, current_total = _distribution(current_texts, baseline["method"]["top_tokens"], baseline_vocabulary)
+    keys = sorted(set(baseline_vocabulary) | set(current_counts))
     baseline_probabilities = _probabilities(baseline["text"]["token_counts"], keys)
     current_probabilities = _probabilities(current_counts, keys)
     token_jsd = jensen_shannon_divergence(baseline_probabilities, current_probabilities)

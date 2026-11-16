@@ -1,0 +1,40 @@
+{
+  "execution_id": "model-drift-simulation-60193f1ed1c1",
+  "execution_type": "controlled_model_drift_simulation",
+  "simulation": {
+    "is_simulation": true,
+    "description": "Las predicciones degradadas se alteran únicamente para demostrar una alerta; las etiquetas y métricas se calculan sobre datos reales."
+  },
+  "data_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\datos\\datos_limp\\Tweets_limpios.csv",
+  "model_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\evidencias\\modelos\\logreg-stable-v1.pkl",
+  "baseline": {
+    "accuracy": 0.9335382513661202,
+    "f1_macro": 0.9181910555986755
+  },
+  "degraded_simulated": {
+    "accuracy": 0.4664617486338798,
+    "f1_macro": 0.44019738942886333
+  },
+  "thresholds": {
+    "accuracy_target": 0.75,
+    "f1_macro_target": 0.7
+  },
+  "model_drift_status": "simulated_degradation_below_accuracy_target",
+  "alert_config": {
+    "text_medium": 0.1,
+    "text_high": 0.2,
+    "class_medium": 0.1,
+    "class_high": 0.2,
+    "model_f1_drop_high": 0.05,
+    "model_f1_drop_critical": 0.1,
+    "cooldown_seconds": 300,
+    "window_policy": "Una evaluación por window_id; alertas repetidas con el mismo fingerprint se silencian durante cooldown.",
+    "severity_justification": {
+      "medium": "Una señal de distribución supera el umbral académico de advertencia; requiere observación y confirmación.",
+      "high": "La señal supera el umbral alto o existe degradación supervisada relevante; requiere investigación prioritaria.",
+      "critical": "Solo se usa para degradación de F1 macro confirmada con etiquetas reales; data drift aislado nunca se eleva automáticamente a crítica."
+    },
+    "phase4_boundary": "No contiene SLI, SLO ni error budgets; esos objetivos se formalizarán en la Fase 4."
+  },
+  "mlflow_run_id": "2a595a9bf6264b1dab31260cba717b94"
+}

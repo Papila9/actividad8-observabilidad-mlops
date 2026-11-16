@@ -1,6 +1,6 @@
 {
-  "text_medium": 0.1,
-  "text_high": 0.2,
+  "text_medium": 0.08456762295081968,
+  "text_high": 0.08900095628415298,
   "class_medium": 0.1,
   "class_high": 0.2,
   "model_f1_drop_high": 0.05,
@@ -12,5 +12,12 @@
     "high": "La señal supera el umbral alto o existe degradación supervisada relevante; requiere investigación prioritaria.",
     "critical": "Solo se usa para degradación de F1 macro confirmada con etiquetas reales; data drift aislado nunca se eleva automáticamente a crítica."
   },
-  "phase4_boundary": "No contiene SLI, SLO ni error budgets; esos objetivos se formalizarán en la Fase 4."
+  "phase4_boundary": "No contiene SLI, SLO ni error budgets; esos objetivos se formalizarán en la Fase 4.",
+  "calibration": {
+    "evidence": "evidencias/drift/calibracion_20_ventanas.json",
+    "windows": 20,
+    "window_size": 300,
+    "seed": 42,
+    "method": "text_medium=max(p95_jsd,p95_ks); text_high=max(p99_jsd,p99_ks); misma fuente, no baseline histórico"
+  }
 }

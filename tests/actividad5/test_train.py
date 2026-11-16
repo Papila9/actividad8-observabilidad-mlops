@@ -3,8 +3,8 @@ import unittest
 import numpy as np
 from sklearn.model_selection import StratifiedKFold
 
-from fuentes.auditoria_fase3 import inspect_duplicate_splits
-from fuentes.train import build_search, evaluate_predictions
+from src.actividad5.auditoria_fase3 import inspect_duplicate_splits
+from src.actividad5.train import build_search, evaluate_predictions
 
 
 class TrainingTests(unittest.TestCase):

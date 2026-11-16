@@ -1,3 +1,3 @@
 # Configuración
 
-Esta carpeta contiene configuración versionable. Los valores de umbrales SLI/SLO, severidades, ventanas de evaluación y políticas de respuesta se definirán y justificarán en la Fase 2, después de conservar el baseline.
+Esta carpeta contiene configuración versionable. `drift_alerts.json` centraliza umbrales de drift, severidades y cooldown; `model_lifecycle.json` centraliza versiones y criterios de aceptación; `slo.json` centraliza objetivos, ventanas y burn rate. Los valores son criterios académicos iniciales, no compromisos de producción.

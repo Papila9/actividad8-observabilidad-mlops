@@ -7,5 +7,11 @@
   "accuracy_target": 0.75,
   "f1_macro_target": 0.70,
   "quality_bad_window_fraction": 0.01,
+  "burn_rate": {
+    "short_window": "5m",
+    "long_window": "1h",
+    "warning": 2.0,
+    "critical": 4.0
+  },
   "academic_note": "Objetivos iniciales para una demostración académica; no son compromisos de producción ni fueron calibrados con tráfico histórico."
 }

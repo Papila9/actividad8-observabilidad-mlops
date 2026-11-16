@@ -1,0 +1,180 @@
+{
+  "calibration_type": "same_dataset_random_windows",
+  "is_historical_baseline": false,
+  "data_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\datos\\datos_limp\\Tweets_limpios.csv",
+  "baseline_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\evidencias\\drift\\baseline.json",
+  "parameters": {
+    "windows": 20,
+    "window_size": 300,
+    "seed": 42
+  },
+  "statistics": {
+    "token_jsd": {
+      "min": 0.016802442510164474,
+      "mean": 0.01967810135591316,
+      "max": 0.022788293401627135,
+      "p95": 0.02226484478454515,
+      "p99": 0.022683603678210738
+    },
+    "length_ks": {
+      "min": 0.02471311475409832,
+      "mean": 0.04830327868852459,
+      "max": 0.09010928961748632,
+      "p95": 0.08456762295081968,
+      "p99": 0.08900095628415298
+    }
+  },
+  "recommended_thresholds": {
+    "medium": {
+      "token_jsd": 0.02226484478454515,
+      "length_ks": 0.08456762295081968
+    },
+    "high": {
+      "token_jsd": 0.022683603678210738,
+      "length_ks": 0.08900095628415298
+    }
+  },
+  "windows": [
+    {
+      "window_id": "calibration-01",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.020630765121081626,
+      "length_ks": 0.03381147540983609
+    },
+    {
+      "window_id": "calibration-02",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.01952548601256995,
+      "length_ks": 0.02525956284153008
+    },
+    {
+      "window_id": "calibration-03",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.02042551973733512,
+      "length_ks": 0.03722677595628421
+    },
+    {
+      "window_id": "calibration-04",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.020181848799504055,
+      "length_ks": 0.07859289617486337
+    },
+    {
+      "window_id": "calibration-05",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.01826402569849712,
+      "length_ks": 0.06191256830601091
+    },
+    {
+      "window_id": "calibration-06",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.019765148848580688,
+      "length_ks": 0.04651639344262293
+    },
+    {
+      "window_id": "calibration-07",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.019822559311570405,
+      "length_ks": 0.054685792349726786
+    },
+    {
+      "window_id": "calibration-08",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.01983456945686228,
+      "length_ks": 0.03203551912568303
+    },
+    {
+      "window_id": "calibration-09",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.020487869987549145,
+      "length_ks": 0.02471311475409832
+    },
+    {
+      "window_id": "calibration-10",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.020273125416455068,
+      "length_ks": 0.09010928961748632
+    },
+    {
+      "window_id": "calibration-11",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.01929753924697027,
+      "length_ks": 0.02945355191256832
+    },
+    {
+      "window_id": "calibration-12",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.02223729485733031,
+      "length_ks": 0.041898907103825156
+    },
+    {
+      "window_id": "calibration-13",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.01798009494671151,
+      "length_ks": 0.08427595628415302
+    },
+    {
+      "window_id": "calibration-14",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.019646128897699778,
+      "length_ks": 0.035054644808743166
+    },
+    {
+      "window_id": "calibration-15",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.01949846696231556,
+      "length_ks": 0.05588797814207652
+    },
+    {
+      "window_id": "calibration-16",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.02028478581445465,
+      "length_ks": 0.03234972677595627
+    },
+    {
+      "window_id": "calibration-17",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.018328951632592298,
+      "length_ks": 0.05964480874316941
+    },
+    {
+      "window_id": "calibration-18",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.016802442510164474,
+      "length_ks": 0.062827868852459
+    },
+    {
+      "window_id": "calibration-19",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.022788293401627135,
+      "length_ks": 0.04076502732240436
+    },
+    {
+      "window_id": "calibration-20",
+      "seed": 42,
+      "rows": 300,
+      "token_jsd": 0.017487110458391776,
+      "length_ks": 0.039043715846994564
+    }
+  ],
+  "methodology": "Los umbrales recomendados son p95 y p99 empíricos de ventanas aleatorias; requieren validación con tráfico representativo y no son universales."
+}

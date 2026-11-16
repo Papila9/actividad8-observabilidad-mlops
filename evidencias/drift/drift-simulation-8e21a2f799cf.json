@@ -1,0 +1,186 @@
+{
+  "execution_id": "drift-simulation-8e21a2f799cf",
+  "execution_type": "controlled_data_drift_simulation",
+  "simulation": {
+    "is_simulation": true,
+    "description": "Se añadieron dos tokens controlados a textos reales; no representa tráfico de producción.",
+    "source_sha256": "82539f706fdafc80f93dec7ae1cfc2310c179952f41548ed5c3ddf36effd67dd",
+    "sample_size": 300
+  },
+  "baseline_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\evidencias\\drift\\baseline.json",
+  "window_baseline": {
+    "rows": 300,
+    "source_sha256": "82539f706fdafc80f93dec7ae1cfc2310c179952f41548ed5c3ddf36effd67dd",
+    "note": "Referencia de ventana derivada del mismo archivo; no reemplaza el baseline histórico persistido."
+  },
+  "detection": {
+    "method": {
+      "length_test": "two-sample Kolmogorov-Smirnov statistic",
+      "token_test": "Jensen-Shannon divergence over token frequencies",
+      "tokenizer": "lowercase Unicode word tokens",
+      "top_tokens": 500
+    },
+    "sample": {
+      "rows": 300,
+      "token_total": 5555
+    },
+    "data_drift": {
+      "token_jsd": 0.008807901347323788,
+      "length_ks": 0.3833333333333334,
+      "signal": 0.3833333333333334,
+      "severity": "high",
+      "thresholds": {
+        "medium": 0.08456762295081968,
+        "high": 0.08900095628415298
+      }
+    },
+    "class_distribution_shift": {
+      "status": "unavailable_without_labels"
+    },
+    "model_drift": {
+      "status": "unavailable_without_real_labels"
+    },
+    "limitations": [
+      "KS se reporta como estadístico; no se interpreta como p-value.",
+      "Jensen-Shannon depende del tokenizador y de los tokens retenidos.",
+      "Data drift no implica por sí mismo pérdida de precisión."
+    ]
+  },
+  "windows": {
+    "before": {
+      "method": {
+        "length_test": "two-sample Kolmogorov-Smirnov statistic",
+        "token_test": "Jensen-Shannon divergence over token frequencies",
+        "tokenizer": "lowercase Unicode word tokens",
+        "top_tokens": 500
+      },
+      "sample": {
+        "rows": 300,
+        "token_total": 4955
+      },
+      "data_drift": {
+        "token_jsd": 0.0,
+        "length_ks": 0.0,
+        "signal": 0.0,
+        "severity": "none",
+        "thresholds": {
+          "medium": 0.08456762295081968,
+          "high": 0.08900095628415298
+        }
+      },
+      "class_distribution_shift": {
+        "status": "unavailable_without_labels"
+      },
+      "model_drift": {
+        "status": "unavailable_without_real_labels"
+      },
+      "limitations": [
+        "KS se reporta como estadístico; no se interpreta como p-value.",
+        "Jensen-Shannon depende del tokenizador y de los tokens retenidos.",
+        "Data drift no implica por sí mismo pérdida de precisión."
+      ]
+    },
+    "during": {
+      "method": {
+        "length_test": "two-sample Kolmogorov-Smirnov statistic",
+        "token_test": "Jensen-Shannon divergence over token frequencies",
+        "tokenizer": "lowercase Unicode word tokens",
+        "top_tokens": 500
+      },
+      "sample": {
+        "rows": 300,
+        "token_total": 5555
+      },
+      "data_drift": {
+        "token_jsd": 0.008807901347323788,
+        "length_ks": 0.3833333333333334,
+        "signal": 0.3833333333333334,
+        "severity": "high",
+        "thresholds": {
+          "medium": 0.08456762295081968,
+          "high": 0.08900095628415298
+        }
+      },
+      "class_distribution_shift": {
+        "status": "unavailable_without_labels"
+      },
+      "model_drift": {
+        "status": "unavailable_without_real_labels"
+      },
+      "limitations": [
+        "KS se reporta como estadístico; no se interpreta como p-value.",
+        "Jensen-Shannon depende del tokenizador y de los tokens retenidos.",
+        "Data drift no implica por sí mismo pérdida de precisión."
+      ]
+    },
+    "after": {
+      "method": {
+        "length_test": "two-sample Kolmogorov-Smirnov statistic",
+        "token_test": "Jensen-Shannon divergence over token frequencies",
+        "tokenizer": "lowercase Unicode word tokens",
+        "top_tokens": 500
+      },
+      "sample": {
+        "rows": 300,
+        "token_total": 4955
+      },
+      "data_drift": {
+        "token_jsd": 0.0,
+        "length_ks": 0.0,
+        "signal": 0.0,
+        "severity": "none",
+        "thresholds": {
+          "medium": 0.08456762295081968,
+          "high": 0.08900095628415298
+        }
+      },
+      "class_distribution_shift": {
+        "status": "unavailable_without_labels"
+      },
+      "model_drift": {
+        "status": "unavailable_without_real_labels"
+      },
+      "limitations": [
+        "KS se reporta como estadístico; no se interpreta como p-value.",
+        "Jensen-Shannon depende del tokenizador y de los tokens retenidos.",
+        "Data drift no implica por sí mismo pérdida de precisión."
+      ]
+    }
+  },
+  "recovery": {
+    "detected_in_window": "during",
+    "recovered_in_window": true,
+    "slo_restored": null,
+    "note": "Data drift no tiene SLO de calidad; la recuperación se define por ausencia de señal estadística."
+  },
+  "alerts": [
+    {
+      "timestamp": "2026-11-16T00:54:13.222+00:00",
+      "event": "drift_alert",
+      "alert_id": "alert-66da6f401defc7cc-window-300",
+      "fingerprint": "66da6f401defc7cc",
+      "execution_id": "drift-simulation-8e21a2f799cf",
+      "window_id": "window-300",
+      "alert_type": "data_drift",
+      "severity": "high",
+      "reason": "text_distribution_changed",
+      "details": {
+        "token_jsd": 0.008807901347323788,
+        "length_ks": 0.3833333333333334,
+        "signal": 0.3833333333333334,
+        "severity": "high",
+        "thresholds": {
+          "medium": 0.08456762295081968,
+          "high": 0.08900095628415298
+        }
+      }
+    }
+  ],
+  "alert_stats": {
+    "detections_generated": 1,
+    "alerts_emitted": 1,
+    "alerts_suppressed": 0
+  },
+  "alert_log_path": "C:\\Users\\pqm95\\OneDrive\\Documentos\\actividad8-mlops-clasificacion-sentimiento-main\\actividad8-observabilidad-mlops\\logs\\drift_alerts.jsonl",
+  "mlflow_run_id": "98468611ffea401c92ad5542e581888e"
+}

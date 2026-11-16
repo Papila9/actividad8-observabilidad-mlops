@@ -74,5 +74,26 @@
       "status": "rejected_candidate"
     }
   },
-  "events": []
+  "events": [
+    {
+      "event": "rollback",
+      "from_version": "logreg-stable-v1",
+      "to_version": "logreg-stable-v1",
+      "reason": "Respuesta controlada a slo_latency",
+      "simulation": true,
+      "timestamp": "2026-11-16T00:38:37.156448+00:00",
+      "target_artifact_sha256": "e47440082877353a1eb7ae68895abac8136f48ab47742fc2099de675c1ee79bf",
+      "model_loaded_successfully": true
+    },
+    {
+      "event": "rollback",
+      "from_version": "logreg-stable-v1",
+      "to_version": "logreg-stable-v1",
+      "reason": "Respuesta controlada a slo_latency",
+      "simulation": true,
+      "timestamp": "2026-11-16T01:01:41.617848+00:00",
+      "target_artifact_sha256": "e47440082877353a1eb7ae68895abac8136f48ab47742fc2099de675c1ee79bf",
+      "model_loaded_successfully": true
+    }
+  ]
 }

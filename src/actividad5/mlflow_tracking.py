@@ -18,15 +18,15 @@ import sklearn
 from mlflow.tracking import MlflowClient
 
 try:
-    from fuentes.auditoria_fase3 import grouped_evaluation
-    from fuentes.datos_prep import load_dataset, sha256_file
-    from fuentes.train import CV_SPLITS, SEED, run_experiments
+    from .auditoria_fase3 import grouped_evaluation
+    from .datos_prep import load_dataset, sha256_file
+    from .train import CV_SPLITS, SEED, run_experiments
 except ImportError:  # Permite ejecutar tambien `python fuentes/mlflow_tracking.py`.
     from auditoria_fase3 import grouped_evaluation
     from datos_prep import load_dataset, sha256_file
     from train import CV_SPLITS, SEED, run_experiments
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DATA = ROOT / "datos" / "datos_limp" / "Tweets_limpios.csv"
 EXPERIMENT_NAME = "Actividad5_Clasificacion_Sentimiento"
 EVALUATIONS = {

@@ -14,7 +14,8 @@ import mlflow
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.reentrenamiento import evaluate_acceptance, save_model, train_and_evaluate
-from src.rollback import create_registry, promote_version, register_version, rollback, save_registry
+from src.configuracion import load_config
+from src.rollback import create_registry, load_active_model, promote_version, register_version, rollback, save_registry
 
 
 def main() -> None:
@@ -26,10 +27,11 @@ def main() -> None:
 
     execution_id = f"retraining-simulation-{uuid.uuid4().hex[:12]}"
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    stable_model, stable_eval = train_and_evaluate(args.data, params={"C": 3.0, "ngram_range": [1, 2]})
-    candidate_model, candidate_eval = train_and_evaluate(args.data, params={"C": 1.0, "ngram_range": [1, 1]})
-    stable_version = "logreg-stable-v1"
-    candidate_version = "logreg-candidate-v2"
+    stable_model, stable_eval = train_and_evaluate(args.data, params={"C": 3.0, "ngram_range": [1, 2], "max_features": 30000})
+    candidate_model, candidate_eval = train_and_evaluate(args.data, params={"C": 1.0, "ngram_range": [1, 1], "max_features": 30000})
+    lifecycle = load_config("model_lifecycle")
+    stable_version = lifecycle["stable_model_version"]
+    candidate_version = lifecycle["candidate_model_version"]
     stable_path = args.output_dir / f"{stable_version}.pkl"
     candidate_path = args.output_dir / f"{candidate_version}.pkl"
     stable_hash = save_model(stable_model, stable_path)
@@ -52,14 +54,16 @@ def main() -> None:
         "data_sha256": candidate_eval["data_sha256"],
         "protocol": candidate_eval,
     }, status="candidate")
-    decision = evaluate_acceptance(candidate_eval, stable_eval)
+    acceptance = lifecycle["acceptance"]
+    decision = evaluate_acceptance(candidate_eval, stable_eval, min_accuracy=float(acceptance["min_accuracy"]), min_f1_macro=float(acceptance["min_f1_macro"]), max_f1_drop=float(acceptance["max_f1_drop_vs_stable"]))
     registry["versions"][candidate_version]["status"] = "accepted_candidate" if decision["accepted"] else "rejected_candidate"
     registry_path = args.output_dir / "model_registry.json"
     save_registry(registry_path, registry)
 
     rollback_registry = copy.deepcopy(registry)
-    promote_version(rollback_registry, candidate_version)
+    promote_version(rollback_registry, candidate_version, explicit_simulation_authorization=True)
     rollback_event = rollback(rollback_registry, stable_version, reason="Simulación de recuperación a la versión estable", simulation=True)
+    load_active_model(rollback_registry)
     rollback_path = args.output_dir / "rollback_simulation_registry.json"
     save_registry(rollback_path, rollback_registry)
     result = {
