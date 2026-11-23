@@ -1,21 +1,24 @@
 {
-  "schema_version": "public-sanitized-v1",
-  "scope": "Publicación de evidencias de Actividad 9",
-  "sanitized_public_copy": true,
-  "protected_activity8_files_untouched": true,
-  "verification_method": [
-    "Elaboración en un clon temporal limpio de main",
-    "Comparación SHA-256 de los archivos nuevos contra sus fuentes autorizadas",
-    "Revisión de cambios limitados a actividad9/evidencias y actividad9/scripts",
-    "Verificación del estado del repositorio original antes y después"
+  "schema_version": "public-sha256-manifest-v1",
+  "description": "Manifest of expected SHA-256 values for the public Activity 9 package.",
+  "scope": "Only public files in actividad9/evidencias and actividad9/scripts are listed.",
+  "expected_sha256": {
+    "evidencias/Tweets.csv": "f0ae2387704870ca5d81376402657b0fe261a214a5f8f5936166c5d74d93fec8",
+    "evidencias/Tweets_limpios.csv": "560d6c7f6e6c411b260c02b8e4bfb0c994de4456d365c15bb71e1b54b6fb9c82",
+    "evidencias/dataset_provenance.json": "02c3936aca6fd52d7ad553f2d1da035f4b8b68c936bfb664c9548f641dee560a",
+    "evidencias/fairness_metodologia.json": "1325671dae2362740f049414a81303e051bd8ae355de851c779c632488480406",
+    "evidencias/fairness_por_aerolinea.csv": "1584df33c9151abdb812ccb143503accc211b662b6705a25fec61c4de27ffdcc",
+    "evidencias/rendimiento_local.csv": "40cfe03f30bc9297b6a1414b1bef3721a1a9deca8e652f5b5b13525755b5296d",
+    "evidencias/rendimiento_metodologia.json": "f5ff72dee19aec9781b8eabef138cac81b2aee242410ed17fe2f24f01e945d00",
+    "scripts/measure_activity9.py": "f412b6b3f372120bb655940731923d215c284ba1e27dc518a6f83cc231d3b637"
+  },
+  "manifest_exclusions": [
+    "This manifest is excluded to avoid circular self-reference.",
+    "verify_integrity.py is excluded because it computes the values in this manifest."
   ],
-  "public_files_verified": true,
-  "historical_activity9_files_preserved": true,
-  "internal_paths_and_inventory_omitted": true,
-  "excluded_artifacts": [
-    "modelo binario estable",
-    "evaluación agrupada interna",
-    "entornos virtuales",
-    "inventarios internos detallados"
-  ]
+  "privacy": {
+    "personal_absolute_paths": false,
+    "internal_activity_5_and_8_inventories": false,
+    "model_binary": false
+  }
 }
