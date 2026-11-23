@@ -1,0 +1,40 @@
+{
+  "dataset_name": "Twitter US Airline Sentiment",
+  "source": {
+    "platform": "Kaggle",
+    "url": "https://www.kaggle.com/datasets/crowdflower/twitter-airline-sentiment/data",
+    "original_source": "Crowdflower Data for Everyone",
+    "license": "CC BY-NC-SA 4.0",
+    "license_notice": "Uso académico no comercial con atribución; cualquier adaptación debe conservar la licencia.",
+    "access_note": "El dataset fue descargado por la persona responsable del proyecto desde Kaggle."
+  },
+  "integrity": {
+    "original_file": "Tweets.csv",
+    "original_sha256": "ea94b23f41892b290dec3330bb8cf9cb6b8bc669eaae5f3a84c40f7b0de8f15e",
+    "processed_file": "Tweets_limpios.csv",
+    "processed_sha256": "82539f706fdafc80f93dec7ae1cfc2310c179952f41548ed5c3ddf36effd67dd",
+    "original_rows": 14640,
+    "processed_rows": 14640,
+    "original_columns": [
+      "tweet_id", "airline_sentiment", "airline_sentiment_confidence", "negativereason",
+      "negativereason_confidence", "airline", "airline_sentiment_gold", "name",
+      "negativereason_gold", "retweet_count", "text", "tweet_coord", "tweet_created",
+      "tweet_location", "user_timezone"
+    ],
+    "processed_columns": ["text", "airline_sentiment"],
+    "row_alignment": {
+      "position_text_mismatches": 0,
+      "processed_text_not_in_original": 0,
+      "empty_processed_text_rows": 0,
+      "verified": true
+    }
+  },
+  "processing_summary": {
+    "retained_fields": ["text", "airline_sentiment"],
+    "operations": ["trimmed text and labels", "removed no rows in the published copy"],
+    "external_data_added": false,
+    "new_personal_data_added": false,
+    "duplicates_retained": true
+  },
+  "privacy_note": "Los CSV contienen el contenido público original del dataset, incluidos nombres de usuario, ubicaciones y texto publicado. No se añadieron datos personales durante el procesamiento."
+}

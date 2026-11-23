@@ -1,0 +1,21 @@
+{
+  "schema_version": "public-sanitized-v1",
+  "scope": "Publicación de evidencias de Actividad 9",
+  "sanitized_public_copy": true,
+  "protected_activity8_files_untouched": true,
+  "verification_method": [
+    "Elaboración en un clon temporal limpio de main",
+    "Comparación SHA-256 de los archivos nuevos contra sus fuentes autorizadas",
+    "Revisión de cambios limitados a actividad9/evidencias y actividad9/scripts",
+    "Verificación del estado del repositorio original antes y después"
+  ],
+  "public_files_verified": true,
+  "historical_activity9_files_preserved": true,
+  "internal_paths_and_inventory_omitted": true,
+  "excluded_artifacts": [
+    "modelo binario estable",
+    "evaluación agrupada interna",
+    "entornos virtuales",
+    "inventarios internos detallados"
+  ]
+}

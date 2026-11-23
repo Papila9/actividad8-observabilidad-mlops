@@ -1,0 +1,73 @@
+{
+  "model": "logreg-stable-v1",
+  "model_sha256": "e47440082877353a1eb7ae68895abac8136f48ab47742fc2099de675c1ee79bf",
+  "protocol": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "stratified": true
+  },
+  "alignment": {
+    "original_rows": 14640,
+    "clean_rows": 14640,
+    "mismatches": 0,
+    "verified": true
+  },
+  "historical_split": {
+    "train_rows": 11712,
+    "test_rows": 2928,
+    "shared_unique_texts": 71,
+    "contaminated_test_rows": 74,
+    "train_test_text_overlap_row_pairs": 96
+  },
+  "rows": [
+    {
+      "airline": "American",
+      "negative_examples": 384,
+      "tp": 345,
+      "fn": 39,
+      "recall_negative": 0.8984375,
+      "gap_vs_best": 0.0
+    },
+    {
+      "airline": "Delta",
+      "negative_examples": 195,
+      "tp": 151,
+      "fn": 44,
+      "recall_negative": 0.7743589743589744,
+      "gap_vs_best": 0.12407852564102562
+    },
+    {
+      "airline": "Southwest",
+      "negative_examples": 244,
+      "tp": 185,
+      "fn": 59,
+      "recall_negative": 0.7581967213114754,
+      "gap_vs_best": 0.14024077868852458
+    },
+    {
+      "airline": "US Airways",
+      "negative_examples": 442,
+      "tp": 397,
+      "fn": 45,
+      "recall_negative": 0.8981900452488688,
+      "gap_vs_best": 0.0002474547511311931
+    },
+    {
+      "airline": "United",
+      "negative_examples": 532,
+      "tp": 473,
+      "fn": 59,
+      "recall_negative": 0.8890977443609023,
+      "gap_vs_best": 0.009339755639097724
+    },
+    {
+      "airline": "Virgin America",
+      "negative_examples": 38,
+      "tp": 23,
+      "fn": 15,
+      "recall_negative": 0.6052631578947368,
+      "gap_vs_best": 0.29317434210526316
+    }
+  ],
+  "interpretation": "Evaluación histórica contaminada por textos idénticos entre train y test; no es un holdout independiente."
+}
